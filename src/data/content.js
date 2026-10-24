@@ -231,8 +231,8 @@ export const cta = {
   footLeft: company.hours,
   footRight: 'Available for new projects',
   // Orange and blue ink blooming in dark water (Unsplash). The tall crop is used on phones.
-  image: '/images/stock/contact-ink.webp',
-  imageSm: '/images/stock/contact-ink-sm.webp',
+  image: '/images/stock/cta-servers.webp',
+  imageSm: '/images/stock/cta-servers-sm.webp',
 };
 
 // Client testimonials. The section stays hidden until at least one real quote is added.

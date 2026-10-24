@@ -13,6 +13,8 @@ export default function PinnedHero({ light, video, videoMobile, image, poster, t
 
   useEffect(() => {
     const el = wrap.current;
+    // Home: a static full-screen hero, so nothing is driven by scroll.
+    if (variant === 'home') return undefined;
     let raf = 0;
     const update = () => {
       raf = 0;
@@ -30,7 +32,7 @@ export default function PinnedHero({ light, video, videoMobile, image, poster, t
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(raf); };
-  }, [image]);
+  }, [image, variant]);
 
   useEffect(() => {
     const v = media.current;

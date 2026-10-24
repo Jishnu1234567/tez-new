@@ -203,3 +203,8 @@
 .vh-wrap--page video.vh-video { filter: blur(6px) saturate(1.2) brightness(.9); transform: scale(1.22); transform-origin: 50% 85%; }
 
 
+
+/* Home hero is static: one full screen, no pin, the page simply scrolls on. */
+.vh-wrap--home { height: auto !important; }
+.vh-wrap--home .vh-sticky { position: relative; padding: 0; }
+.vh-wrap--home .vh { border-radius: 0; }
