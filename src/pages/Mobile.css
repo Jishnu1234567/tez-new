@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Per-page character: each page has its own scroll animation (all sizes)
+   and its own phone layout, so pages no longer feel like one template.
+   html.page-<name> is set in App.jsx.
+   ========================================================================== */
+
+/* ---- Scroll animations ----
+   Home: rise (default ppUp) · Services: 3D tilt-up · Work: zoom
+   Process: slide from the left · About: blur into focus · Contact: slide from the right */
+@keyframes ppTilt { from { opacity: 0; transform: perspective(900px) rotateX(18deg) translateY(44px); } to { opacity: 1; transform: none; } }
+@keyframes ppZoom { from { opacity: 0; transform: scale(.88); } to { opacity: 1; transform: none; } }
+@keyframes ppLeft { from { opacity: 0; transform: translateX(-56px); } to { opacity: 1; transform: none; } }
+@keyframes ppBlur { from { opacity: 0; filter: blur(14px); transform: translateY(14px); } to { opacity: 1; filter: none; transform: none; } }
+@keyframes ppRight { from { opacity: 0; transform: translateX(56px); } to { opacity: 1; transform: none; } }
+html.page-services .pp-on .pp-a, html.page-services .pp-on.pp-a { animation-name: ppTilt; transform-origin: 50% 100%; animation-duration: .9s; }
+html.page-work .pp-on .pp-a, html.page-work .pp-on.pp-a { animation-name: ppZoom; animation-duration: 1s; }
+html.page-process .pp-on .pp-a, html.page-process .pp-on.pp-a { animation-name: ppLeft; }
+html.page-about .pp-on .pp-a, html.page-about .pp-on.pp-a { animation-name: ppBlur; animation-duration: 1.1s; }
+html.page-contact .pp-on .pp-a, html.page-contact .pp-on.pp-a { animation-name: ppRight; }
+
+
+@media (max-width: 640px) {
+  /* ---------- swipe helper (applied to several lists below) ---------- */
+  .pg-gallery, .pg-meta, .pg-values, .pg-types, .pg-jump {
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .pg-gallery::-webkit-scrollbar, .pg-meta::-webkit-scrollbar,
+  .pg-values::-webkit-scrollbar, .pg-types::-webkit-scrollbar, .pg-jump::-webkit-scrollbar { display: none; }
+
+  /* ================= HOME ================= */
+  /* Process: a 2 x 2 tile grid instead of four tall cards */
+  .pp-proc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pp-proc-grid .pp-card { padding: 18px 16px; border-radius: 22px; }
+  .pp-proc-grid strong { margin-top: 22px; font-size: 19px; }
+  .pp-proc-grid p { margin: 6px 0 14px; font-size: 13px; }
+  .pp-proc-grid .pp-pill { padding: 5px 10px; font-size: 11.5px; }
+
+  /* Why Tezco: mosaic (big promise card, then small stat tiles two-up) */
+  .pp-bento { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pp-feature { grid-column: 1 / -1; min-height: 380px; }
+  .pp-stat { min-height: 150px; padding: 18px 16px; border-radius: 22px; }
+  .pp-stat strong { font-size: 30px; }
+  .pp-stat p { margin-top: 14px; font-size: 13px; }
+  .pp-stat.pp-wide { grid-column: 1 / -1; }
+
+  /* ================= SERVICES PAGE ================= */
+  /* Sticky jump bar under the navbar */
+  .pg-jump {
+    position: sticky; top: 68px; z-index: 6; flex-wrap: nowrap; overflow-x: auto;
+    margin: 0 -16px 32px; padding: 10px 16px; background: rgba(244, 241, 234, .92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .pg-jump a { flex: none; padding: 8px 14px 8px 8px; font-size: 14px; }
+  .pg-jump a b { width: 26px; height: 26px; }
+  /* Each service: the photo pins, and a white card slides up over it */
+  .pg-svc-list { gap: 40px; }
+  .pg-svc { display: block; scroll-margin-top: 120px; }
+  .pg-svc-media {
+    position: sticky; top: 120px; z-index: 0; aspect-ratio: auto; height: 46vh;
+    margin: 0 -16px; border-radius: 0;
+  }
+  .pg-svc-body {
+    position: relative; z-index: 2; margin: -56px 0 0; padding: 26px 20px 28px;
+    border-radius: 28px; background: #fff; box-shadow: 0 -24px 40px -30px rgba(0, 0, 0, .5);
+  }
+  .pg-svc-body h2 { font-size: 34px; }
+  .pg-svc-body .pg-checks { grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+  .pg-svc-body .pg-checks li { padding-left: 26px; font-size: 13.5px; }
+  .pg-svc-body .pg-checks li::before { width: 18px; height: 18px; background-size: 10px; }
+  .pg-svc-body .pp-btn { width: 100%; justify-content: space-between; padding-left: 22px; }
+
+  /* ================= WORK PAGE ================= */
+  .pg-case-top { gap: 20px; }
+  .pg-meta {
+    display: flex; gap: 10px; overflow-x: auto; margin: 0 -16px; padding: 0 16px; background: none; border-radius: 0;
+  }
+  .pg-meta > div { flex: 0 0 auto; max-width: 240px; padding: 14px 16px; border-radius: 18px; background: #fff; }
+  .pg-gallery { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 10px; }
+  .pg-shot, .pg-shot.is-wide { flex: 0 0 86%; scroll-snap-align: center; }
+  .pg-built { display: flex; flex-direction: column-reverse; gap: 28px; padding: 28px 20px; }
+  .pg-phone { width: 220px; transform: rotate(-3deg); }
+
+  /* ================= PROCESS PAGE ================= */
+  /* Vertical timeline: the orange line fills as you scroll (--tl from ProcessPage.jsx) */
+  .pg-steps { --tl: 0; position: relative; gap: 40px; padding-left: 34px; }
+  .pg-steps::before, .pg-steps::after { content: ''; position: absolute; left: 11px; top: 6px; bottom: 6px; width: 2px; border-radius: 2px; background: var(--line); }
+  .pg-steps::after { background: var(--orange); transform: scaleY(var(--tl)); transform-origin: top; }
+  .pg-step, .pg-step:nth-child(n) {
+    display: flex; flex-direction: column; gap: 16px; min-height: 0; padding: 0;
+    background: none; color: var(--ink); box-shadow: none; border-radius: 0;
+  }
+  .pg-step-n, .pg-step:nth-child(n) .pg-step-n {
+    position: absolute; left: -34px; top: 0; z-index: 1; display: grid; place-items: center;
+    width: 24px; height: 24px; border-radius: 50%; background: var(--orange); color: #fff;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0; line-height: 1; box-shadow: 0 0 0 5px var(--cream);
+  }
+  .pg-step:nth-child(n) .pg-lead, .pg-step:nth-child(n) .pg-mini { color: var(--soft); }
+  .pg-step:nth-child(n) .pp-pill { background: rgba(11, 11, 11, .06); color: var(--ink); }
+  .pg-step:nth-child(n) .pg-checks li::before { background-color: var(--orange); }
+  .pg-step-body h2 { margin-top: 10px; font-size: 32px; }
+  .pg-step-media { min-height: 0; aspect-ratio: 16 / 10; border-radius: 20px; }
+
+  /* ================= ABOUT PAGE ================= */
+  .pg-story-media { order: -1; min-height: 0; aspect-ratio: 4 / 5; margin: 0 12px; border-radius: 220px 220px 28px 28px; }
+  .pg-story .pg-facts { grid-template-columns: 1fr 1fr; padding: 20px; }
+  .pg-story .pg-facts dd { font-size: 14px; overflow-wrap: anywhere; }
+  .pg-values { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 10px; }
+  .pg-values .pp-card { flex: 0 0 72%; min-height: 220px; scroll-snap-align: start; }
+  .pg-values strong { margin-top: auto; }
+
+  /* ================= CONTACT PAGE ================= */
+  .pg-methods { gap: 10px; }
+  .pg-method {
+    display: grid; grid-template-columns: 50px 1fr; grid-template-rows: auto auto auto; column-gap: 14px; row-gap: 2px;
+    align-items: center; min-height: 0; padding: 16px; border-radius: 22px;
+  }
+  .pg-method-ic { grid-row: 1 / 4; width: 50px; height: 50px; margin: 0; }
+  .pg-method-label { margin: 0; font-size: 11px; }
+  .pg-method strong { font-size: 18px; }
+  .pg-method-note { font-size: 12.5px; }
+  .pg-method .pp-circle { display: none; }
+  .pg-form > * { min-width: 0; }
+  .pg-types { min-width: 0; flex-wrap: nowrap; overflow-x: auto; margin: 8px -24px 0; padding: 0 24px 6px; }
+  .pg-types label { flex: none; white-space: nowrap; }
+}
