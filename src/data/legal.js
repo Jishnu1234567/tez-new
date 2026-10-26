@@ -4,7 +4,7 @@
 // (for example if analytics, a CRM or online payments are added).
 import { company } from './content.js';
 
-export const LEGAL_UPDATED = '24 October 2026';
+export const LEGAL_UPDATED = '26 October 2026';
 
 export const privacy = {
   slug: 'privacy',
@@ -23,7 +23,7 @@ export const privacy = {
       id: 'what-we-collect', title: 'What we collect',
       body: ['We only collect what we need to answer you and to deliver projects:'],
       list: [
-        'Contact details you give us, such as your name, email address, phone number and company name.',
+        'Contact details you give us, such as your name, email address, phone number and company name, including through the project brief form on our Contact page.',
         'Project information you choose to share, such as your idea, requirements, timeline and budget.',
         'Messages you send us by email, phone or WhatsApp, and any files you attach.',
         'Basic technical data that our hosting provider records automatically when you visit, such as IP address, browser type, pages requested and the time of the request. This is used for security and to keep the site running.',
@@ -52,6 +52,7 @@ export const privacy = {
       body: ['We share personal data only with service providers who help us run our business, and only as much as they need:'],
       list: [
         'Messaging and email providers, for example WhatsApp (Meta) when you contact us on WhatsApp, and our email service provider.',
+        'Web3Forms, which delivers the contact form on this website to our inbox. It processes the details you enter only to deliver them to us.',
         'Our website hosting provider, which serves the site and keeps its technical logs.',
         'Professional advisers such as accountants and lawyers, under a duty of confidentiality.',
         'Government or law-enforcement authorities, where the law requires it.',
