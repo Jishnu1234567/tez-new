@@ -199,7 +199,8 @@ export const contactPage = {
   form: {
     eyebrow: 'Project brief',
     title: ['Tell us what', "you're building."],
-    text: 'Fill this in and it opens a ready-to-send email or WhatsApp message. No account, no spam.',
+    text: 'Share a few details and it comes straight to our team. We reply within a day with next steps.',
+    budgets: ['Under ₹50,000', '₹50,000 to ₹2 lakh', '₹2 lakh to ₹5 lakh', 'Above ₹5 lakh'],
     types: ['SaaS platform', 'Website or store', 'Mobile app', 'AI solution', 'Automation', 'College project', 'Something else'],
   },
 };
