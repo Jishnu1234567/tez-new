@@ -20,9 +20,10 @@ The build already includes:
 - Security and cache headers for Netlify or Cloudflare Pages (`_headers`) and Apache or cPanel (`.htaccess`).
 
 ## Before launch
+- [ ] Contact form: get a free Web3Forms access key for the enquiry inbox, set `VITE_WEB3FORMS_KEY` on the host (or in `.env`), rebuild, then send one test brief from `/contact/` and confirm it arrives.
 - [ ] Have a lawyer review `/privacy/` and `/terms/` (text lives in `src/data/legal.js`).
-- [ ] Confirm the rights to the reference images and videos (marble hands, editor panel, smoke, lighthouse and circuit-head videos).
-- [ ] Confirm Element Sound Studio is happy to be shown in the portfolio.
+- [ ] Confirm the rights to the brief-supplied media still in use: the editor panel image (Portfolio footer), the lighthouse video (Portfolio hero) and the circuit-head video (Process hero).
+- [ ] Confirm Element Sound Studio and Ranjith Meleppat are happy to be shown in the portfolio.
 - [ ] Point the domain at the host and turn on HTTPS.
 - [ ] Check that `/does-not-exist` shows the 404 page.
 
