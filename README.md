@@ -69,7 +69,7 @@ Without a key, or if the service is unreachable, the form keeps what the visitor
 - `sitemap.xml`, `robots.txt` (AI crawlers allowed) and `llms.txt`
 - Self-hosted fonts, no third-party requests
 
-The production domain defaults to `https://www.tezcoservices.com`. To build for another domain:
+The production domain defaults to `https://thetezco.com`. To build for another domain:
 
 ```bash
 SITE_URL=https://example.com npm run build

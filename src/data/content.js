@@ -1,5 +1,5 @@
 // All website copy lives here. Sources: the Tezco Company Profile (TEZCO-CO-001),
-// the proposal system's company data, and the previous tezcoservices.com site.
+// the proposal system's company data, and the previous company website.
 
 export const company = {
   brand: 'Tezco',
@@ -11,7 +11,7 @@ export const company = {
   phoneHref: 'tel:+919995599294',
   whatsappBase: 'https://wa.me/919995599294',
   whatsapp: 'https://wa.me/919995599294?text=' + encodeURIComponent('Hi Tezco, I would like to discuss a project.'),
-  website: 'www.tezcoservices.com',
+  website: 'thetezco.com',
   address: 'Building No. 23/93-1, Thynothil Road, Aluva, Ernakulam, Kerala 683101',
   hours: 'Mon to Sat, 10:00 AM to 7:00 PM IST',
 };
@@ -152,7 +152,7 @@ export const showcase = {
     { v: 'plain', img: '/images/photos/team-high-five.webp', t: '04 · LAUNCH' },
   ],
   browser: {
-    url: 'tezcoservices.com/how-we-work',
+    url: 'thetezco.com/how-we-work',
     announcement: 'Free 30-minute discovery call · No obligation',
     kicker: 'Technical Expertz',
     hero: {
