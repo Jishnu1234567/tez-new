@@ -6,10 +6,8 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Force HTTPS and the bare thetezco.com host (www and http redirect here).
-  RewriteCond %{HTTPS} off [OR]
-  RewriteCond %{HTTP_HOST} !^thetezco\.com$ [NC]
-  RewriteRule ^ https://thetezco.com%{REQUEST_URI} [L,R=301]
+  # HTTPS and www -> https://thetezco.com are handled by the hosting (Hostinger CDN).
+  # Do not add a %{HTTPS} rule here: behind the CDN it can cause a redirect loop.
   # /services -> /services/ (pages are folders with an index.html)
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
