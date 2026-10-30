@@ -8,7 +8,7 @@ npm run build          # client build + pre-render + sitemap.xml, robots.txt, ll
 ```
 
 Upload the contents of `dist/` to any static host. If the live domain is not
-`https://www.tezcoservices.com`, build with `SITE_URL=https://your-domain npm run build`
+`https://thetezco.com`, build with `SITE_URL=https://your-domain npm run build`
 and update the host name in `public/.htaccess`.
 
 The build already includes:
@@ -28,7 +28,7 @@ The build already includes:
 - [ ] Check that `/does-not-exist` shows the 404 page.
 
 ## After launch
-- [ ] Google Search Console: verify the domain and submit `https://www.tezcoservices.com/sitemap.xml`.
+- [ ] Google Search Console: verify the domain and submit `https://thetezco.com/sitemap.xml`.
 - [ ] Bing Webmaster Tools: import from Search Console (this also feeds ChatGPT search and Copilot).
 - [ ] Google Business Profile: create or claim it with the same name, address and phone as the site.
 - [ ] Test sharing a link on WhatsApp and LinkedIn to see the preview card.

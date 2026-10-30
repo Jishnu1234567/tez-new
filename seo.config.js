@@ -7,7 +7,7 @@ import { faq, caseStudies } from './src/data/pages.js';
 import { FONT_FACES, FONT_PRELOAD } from './src/fonts.generated.js';
 
 // Production address of the site. Override at build time with SITE_URL=https://... if it changes.
-export const SITE = (process.env.SITE_URL || 'https://www.tezcoservices.com').replace(/\/$/, '');
+export const SITE = (process.env.SITE_URL || 'https://thetezco.com').replace(/\/$/, '');
 export const OG_IMAGE = '/og-image.jpg';
 
 // Fonts are self-hosted (scripts/fetch-fonts.mjs). Each page lists the families it uses;
