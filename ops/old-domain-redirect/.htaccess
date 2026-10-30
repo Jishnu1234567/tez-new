@@ -1,0 +1,12 @@
+# Upload to public_html of tezcoservices.com (old domain).
+# Permanently redirects every page of the old domain to the same page on thetezco.com,
+# so visitors land on the new site and Google transfers the old domain's ranking.
+Options -Indexes
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(.*)$ https://thetezco.com/$1 [R=301,L]
+</IfModule>
+# Fallback if mod_rewrite is unavailable.
+<IfModule !mod_rewrite.c>
+  Redirect 301 / https://thetezco.com/
+</IfModule>
