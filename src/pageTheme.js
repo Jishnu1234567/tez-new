@@ -4,9 +4,9 @@
 export const PAGE_KEYS = ['home', 'services', 'work', 'process', 'about', 'contact', 'privacy', 'terms', 'notfound'];
 
 // Hero is light, so the navbar starts with dark text.
-export const LIGHT_HERO = ['home', 'services', 'process', 'work', 'about', 'privacy', 'terms'];
+export const LIGHT_HERO = ['home', 'services', 'process', 'work', 'about', 'privacy', 'terms', 'notfound'];
 // Once scrolled, the navbar becomes a light frosted bar with dark text.
-export const LIGHT_BAR = ['home', 'services', 'process', 'about', 'work', 'privacy', 'terms'];
+export const LIGHT_BAR = ['home', 'services', 'process', 'about', 'work', 'privacy', 'terms', 'notfound'];
 
 export function htmlClasses(page, { wide = true, aboutFirst = true } = {}) {
   return [
@@ -31,4 +31,4 @@ export function applyHtmlClasses(page) {
 }
 
 // Pages with a dark hero get the dark glass navbar.
-export const NAV_DARK = ['contact', 'notfound'];
+export const NAV_DARK = ['contact'];

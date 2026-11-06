@@ -175,14 +175,16 @@ export const terms = {
 };
 
 export const notFound = {
-  code: '404',
-  title: 'This page took a different route.',
-  text: 'The page you are looking for has moved or no longer exists. Try one of these instead, or tell us what you were after.',
+  title: 'Page not found (404)',
+  intro: ['Hey there, this page took a wrong turn.', 'Error 404 · we could not find what you were looking for'],
+  line: "It may have moved, or it never existed. Good ideas still find us, though. Where would you like to go next?",
   links: [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services/' },
-    { label: 'Portfolio', href: '/work/' },
-    { label: 'Process', href: '/process/' },
-    { label: 'About', href: '/about/' },
+    { label: 'Back to home', href: '/' },
+    { label: 'See our services', href: '/services/' },
+    { label: 'View our portfolio', href: '/work/' },
+    { label: 'Book a free call', href: '/contact/' },
   ],
+  video: '/video/notfound-scrub.mp4',
+  videoMobile: '/video/notfound-scrub-900.mp4',
+  poster: '/video/notfound-poster.webp',
 };
