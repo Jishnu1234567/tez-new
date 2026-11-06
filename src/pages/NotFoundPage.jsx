@@ -65,7 +65,17 @@ const CopyIcon = () => (
 export default function NotFoundPage() {
   const n = notFound;
   const video = useRef(null);
-  const src = useVideoSrc(n.video, n.videoMobile);
+  const chosen = useVideoSrc(n.video, n.videoMobile);
+  // Load the video only after the page itself has finished loading, so it never
+  // competes with the text and fonts for the first paint. The poster shows until then.
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const go = () => (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(() => setReady(true));
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go, { once: true });
+    return () => window.removeEventListener('load', go);
+  }, []);
+  const src = ready ? chosen : undefined;
   useScrub(video);
   const { displayed, done } = useTypewriter(n.line);
   const [shown, setShown] = useState(false);
@@ -84,9 +94,11 @@ export default function NotFoundPage() {
       <span className="nf-wash" aria-hidden="true" />
 
       <div className="nf-in">
+        <p className="nf-big" aria-hidden="true"><span>404</span><em>Page not found</em></p>
         <p className="nf-blur" aria-hidden="true">{n.intro[0]}<br />{n.intro[1]}</p>
         <h1 id="nf-title" className="nf-sr">{n.title}</h1>
-        <p className="nf-type" aria-label={n.line}>
+        <p className="nf-type">
+          <span className="nf-sr">{n.line}</span>
           <span aria-hidden="true">{displayed}</span>
           {!done && <span className="nf-cursor" aria-hidden="true" />}
         </p>
@@ -100,7 +112,6 @@ export default function NotFoundPage() {
         </nav>
       </div>
 
-      <span className="nf-code" aria-hidden="true">404</span>
     </section>
   );
 }

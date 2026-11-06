@@ -88,7 +88,6 @@ export const pages = {
     fonts: fonts(),
     noindex: true,
     name: 'Page not found',
-    preload: '/video/notfound-poster.webp',
   },
 };
 

@@ -22,10 +22,24 @@ const FILES = {
 
 const { render } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href);
 
+// Inline the stylesheet into each page so the first paint never waits for a CSS request.
+const cssCache = {};
+async function inlineCss(html) {
+  const re = /<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/g;
+  for (const [tag, href] of [...html.matchAll(re)]) {
+    cssCache[href] ??= (await readFile(resolve(dist, href.slice(1)), 'utf8')).replace(/<\/style/gi, '<\/style');
+    html = html.replace(tag, `<style>${cssCache[href]}</style>`);
+  }
+  return html;
+}
+
 let failed = 0;
 for (const [key, file] of Object.entries(FILES)) {
   const path = resolve(dist, file);
-  let html = await readFile(path, 'utf8');
+  let html = await inlineCss(await readFile(path, 'utf8'));
+  // The page is pre-rendered, so its content does not need the app script to show.
+  // Fetch the script at low priority so text, fonts and the hero image load first.
+  html = html.replace(/<script type="module" crossorigin src=/g, '<script type="module" crossorigin fetchpriority="low" src=');
   let body = '';
   try {
     body = render(key);
