@@ -100,7 +100,12 @@ const organization = {
   '@id': ORG_ID,
   name: 'Tezco',
   legalName: company.legalName,
-  alternateName: ['Tezco Solutions', 'Technical Expertz'],
+  alternateName: ['Tezco Solutions', 'Tezco Services', 'Technical Expertz', 'TheTezco'],
+  // Official profiles: lets search engines connect the brand across the web.
+  sameAs: [
+    'https://in.linkedin.com/company/tezco-technical-expertz',
+    'https://www.instagram.com/tezcoservices/',
+  ],
   url: `${SITE}/`,
   logo: { '@type': 'ImageObject', url: `${SITE}/icon-512.png`, width: 512, height: 512 },
   image: `${SITE}${OG_IMAGE}`,
