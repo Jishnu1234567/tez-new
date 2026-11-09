@@ -1,16 +1,16 @@
 // Legal pages. Written for Tezco's current setup: no accounts, no payments on the site,
-// no analytics or advertising cookies; enquiries arrive by email, phone or WhatsApp.
+// no cookies (visit counts use cookie-free Cloudflare Web Analytics); enquiries arrive by email, phone or WhatsApp.
 // Have a lawyer review both documents before launch and whenever the setup changes
 // (for example if analytics, a CRM or online payments are added).
 import { company } from './content.js';
 
-export const LEGAL_UPDATED = '26 October 2026';
+export const LEGAL_UPDATED = '9 November 2026';
 
 export const privacy = {
   slug: 'privacy',
   eyebrow: 'Legal',
   title: 'Privacy Policy',
-  intro: `This policy explains what personal data ${company.legalName} ("Tezco", "we", "us") collects through this website and when you contact us, why we use it, and the choices you have. It is written to meet the Information Technology Act, 2000 and its rules, and the Digital Personal Data Protection Act, 2023.`,
+  intro: `This policy explains what personal data ${company.legalName} ("Tezco Technology Studio", "Tezco", "we", "us") collects through this website and when you contact us, why we use it, and the choices you have. It is written to meet the Information Technology Act, 2000 and its rules, and the Digital Personal Data Protection Act, 2023.`,
   sections: [
     {
       id: 'who-we-are', title: 'Who we are',
@@ -28,7 +28,7 @@ export const privacy = {
         'Messages you send us by email, phone or WhatsApp, and any files you attach.',
         'Basic technical data that our hosting provider records automatically when you visit, such as IP address, browser type, pages requested and the time of the request. This is used for security and to keep the site running.',
       ],
-      after: ['This website does not use advertising or analytics cookies, and it does not ask you to create an account. We do not knowingly collect sensitive personal data such as financial, health or biometric information through the website.'],
+      after: ['To understand how the website is used, we count visits with Cloudflare Web Analytics. It does not use cookies, does not track you across other websites and does not identify you personally: we only see totals such as page views, the pages visited, the referring website, the country and the type of device. This website does not use advertising or analytics cookies, and it does not ask you to create an account. We do not knowingly collect sensitive personal data such as financial, health or biometric information through the website.'],
     },
     {
       id: 'how-we-use', title: 'How we use your data',
@@ -54,6 +54,7 @@ export const privacy = {
         'Messaging and email providers, for example WhatsApp (Meta) when you contact us on WhatsApp, and our email service provider.',
         'Web3Forms, which delivers the contact form on this website to our inbox. It processes the details you enter only to deliver them to us.',
         'Our website hosting provider, which serves the site and keeps its technical logs.',
+        'Cloudflare, which provides our cookie-free website visit statistics.',
         'Professional advisers such as accountants and lawyers, under a duty of confidentiality.',
         'Government or law-enforcement authorities, where the law requires it.',
       ],
@@ -109,7 +110,7 @@ export const terms = {
   slug: 'terms',
   eyebrow: 'Legal',
   title: 'Terms of Service',
-  intro: `These terms apply to your use of this website and to any enquiry you make to ${company.legalName} ("Tezco", "we", "us"). By using the website you agree to them. Project work is always governed by a separate written agreement.`,
+  intro: `These terms apply to your use of this website and to any enquiry you make to ${company.legalName} ("Tezco Technology Studio", "Tezco", "we", "us"). By using the website you agree to them. Project work is always governed by a separate written agreement.`,
   sections: [
     {
       id: 'about', title: 'About us',

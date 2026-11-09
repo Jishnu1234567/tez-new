@@ -9,6 +9,8 @@ import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import LegalPage from './pages/LegalPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import ServiceDetailPage from './pages/ServiceDetailPage.jsx';
+import { servicePages } from './data/servicePages.js';
 import { privacy, terms } from './data/legal.js';
 import { applyHtmlClasses } from './pageTheme.js';
 import './pages/Pages.css';
@@ -25,6 +27,8 @@ const PAGES = {
   privacy: () => <LegalPage doc={privacy} />,
   terms: () => <LegalPage doc={terms} />,
   notfound: NotFoundPage,
+  // svc-saas, svc-web, ...: one page per service.
+  ...Object.fromEntries(Object.keys(servicePages).map((slug) => [`svc-${slug}`, () => <ServiceDetailPage slug={slug} />])),
 };
 
 export default function App({ page = 'home' }) {

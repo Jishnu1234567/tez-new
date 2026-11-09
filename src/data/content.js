@@ -3,6 +3,9 @@
 
 export const company = {
   brand: 'Tezco',
+  // Exactly as on the Google Business Profile. Search engines match the site to the
+  // profile by this name, the address and the phone number, so keep all three identical.
+  name: 'Tezco Technology Studio',
   legalName: 'Technical Expertz Information Technology Private Limited',
   cin: 'U62099KL2026PTC104235',
   founded: '2026',
@@ -78,7 +81,7 @@ export const about = {
   // Opening hero: fullscreen looping video, cinematic serif headline, liquid-glass button.
   // Words in `em` are shown in the accent colour.
   title: [{ t: 'We engineer ' }, { em: 'software' }, { t: ' that moves ' }, { em: 'business forward.' }],
-  text: 'Tezco builds SaaS platforms, websites, mobile apps and AI solutions for businesses that want to grow, at a fixed price, with weekly progress and 30 days of free support.',
+  text: 'Tezco Technology Studio builds SaaS platforms, websites, mobile apps and AI solutions for businesses that want to grow, at a fixed price, with weekly progress and 30 days of free support.',
   // Hero booking capsule (replaces the old big button).
   book: { note: 'Free 30-min discovery call', sub: 'Usually replies within a day', label: 'Book a call', href: '/contact/' },
   // Self-hosted video with the night sky keyed out to white.
@@ -263,12 +266,12 @@ export const footer = {
     {
       title: 'Services',
       links: [
-        { label: 'SaaS Development', href: '/services/#saas' },
-        { label: 'Web Development', href: '/services/#web' },
-        { label: 'Mobile Apps', href: '/services/#mobile' },
-        { label: 'AI Solutions', href: '/services/#ai' },
-        { label: 'Automation', href: '/services/#automation' },
-        { label: 'College Projects', href: '/services/#college' },
+        { label: 'SaaS Development', href: '/services/saas-development/' },
+        { label: 'Web Development', href: '/services/web-development/' },
+        { label: 'Mobile Apps', href: '/services/mobile-app-development/' },
+        { label: 'AI Solutions', href: '/services/ai-development/' },
+        { label: 'Automation', href: '/services/workflow-automation/' },
+        { label: 'College Projects', href: '/services/final-year-projects/' },
       ],
     },
     {

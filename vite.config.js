@@ -2,10 +2,12 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { headHtml } from './seo.config.js';
+import { servicePages } from './src/data/servicePages.js';
 
 // Multi-page build: every page is its own HTML file (/, /services/, /work/, ...),
 // so it works on any static host without rewrite rules.
 const page = (p) => resolve(__dirname, p, 'index.html');
+const SERVICE_DIRS = Object.entries(servicePages).map(([slug, p]) => [slug, p.path.split('/')[2]]);
 
 // Fills each page's <!--head:key--> placeholder with its title, meta tags, social card,
 // fonts, hero preload and structured data from seo.config.js.
@@ -14,7 +16,7 @@ const seoHead = () => ({
   transformIndexHtml: {
     order: 'pre',
     handler(html) {
-      return html.replace(/<!--head:(\w+)-->/, (_, key) => headHtml(key));
+      return html.replace(/<!--head:([\w-]+)-->/, (_, key) => headHtml(key));
     },
   },
 });
@@ -36,6 +38,8 @@ export default defineConfig({
         privacy: page('privacy'),
         terms: page('terms'),
         notfound: resolve(__dirname, '404.html'),
+        // One page per service: services/<service>/index.html
+        ...Object.fromEntries(SERVICE_DIRS.map(([slug, dir]) => [`svc-${slug}`, page(`services/${dir}`)])),
       },
     },
   },

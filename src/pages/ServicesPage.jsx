@@ -1,5 +1,6 @@
 import { services } from '../data/content.js';
 import { pageHeroes, serviceDetails, contactImages } from '../data/pages.js';
+import { servicePages } from '../data/servicePages.js';
 import GlassHero from '../components/GlassHero.jsx';
 import { ProcessCards } from '../components/Services.jsx';
 import ContactSection from '../components/ContactSection.jsx';
@@ -28,7 +29,10 @@ function ServiceBlock({ s, i }) {
         <div className="pg-stack pp-a" style={{ '--d': '.25s' }}>
           {d.stack.map((t) => <span key={t}>{t}</span>)}
         </div>
-        <a className="pp-btn is-accent pp-a" style={{ '--d': '.3s' }} href="/contact/">Discuss this service<span className="pp-btn-ic"><ArrowUpRight /></span></a>
+        <div className="pp-a" style={{ '--d': '.3s' }}>
+          <a className="pp-btn is-accent" href="/contact/">Discuss this service<span className="pp-btn-ic"><ArrowUpRight /></span></a>
+          <a className="pp-btn is-dark svc-more-link" href={servicePages[s.slug].path}>Learn more<span className="pp-btn-ic"><ArrowUpRight /></span></a>
+        </div>
       </div>
     </article>
   );

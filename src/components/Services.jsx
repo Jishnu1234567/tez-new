@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { services } from '../data/content.js';
 import { PaperHead, Eyebrow, FillTitle, ArrowUpRight, useInView } from './Paper.jsx';
 import { Layers, Code, Mobile, Spark, Bolt, Cap } from './Icons.jsx';
+import { servicePages } from '../data/servicePages.js';
 
 const SVC_ICONS = { saas: Layers, web: Code, mobile: Mobile, ai: Spark, automation: Bolt, college: Cap };
 
@@ -99,7 +100,7 @@ export function ServiceStack() {
           const Icon = SVC_ICONS[s.slug];
           return (
             <li className="ss-item" style={{ '--i': i }} key={s.slug}>
-              <a className={`ss-card is-${THEMES[i % THEMES.length]}`} href={`/services/#${s.slug}`}>
+              <a className={`ss-card is-${THEMES[i % THEMES.length]}`} href={servicePages[s.slug].path}>
                 <span className="ss-body">
                   <span className="ss-top">
                     <span className="ss-icon" aria-hidden="true"><Icon width={20} height={20} /></span>

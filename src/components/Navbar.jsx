@@ -15,6 +15,7 @@ const Arrow = (p) => (
 // once the page scrolls, and on phones opens a full menu panel.
 export default function Navbar({ page }) {
   const dark = NAV_DARK.includes(page);
+  const navPage = page.startsWith('svc-') ? 'services' : page; // service pages live under Services
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -47,7 +48,7 @@ export default function Navbar({ page }) {
 
         <nav className="tn-links" aria-label="Primary">
           {nav.links.map((l) => (
-            <a key={l.label} href={l.href} className={l.page === page ? 'is-active' : undefined} aria-current={l.page === page ? 'page' : undefined}>{l.label}</a>
+            <a key={l.label} href={l.href} className={l.page === navPage ? 'is-active' : undefined} aria-current={l.page === navPage ? 'page' : undefined}>{l.label}</a>
           ))}
         </nav>
 
@@ -62,7 +63,7 @@ export default function Navbar({ page }) {
       <div id="tn-menu" className="tn-menu" hidden={!open}>
         <nav aria-label="Mobile">
           {nav.links.map((l, i) => (
-            <a key={l.label} href={l.href} className={l.page === page ? 'is-active' : undefined} aria-current={l.page === page ? 'page' : undefined} onClick={() => setOpen(false)} style={{ '--i': i }}>
+            <a key={l.label} href={l.href} className={l.page === navPage ? 'is-active' : undefined} aria-current={l.page === navPage ? 'page' : undefined} onClick={() => setOpen(false)} style={{ '--i': i }}>
               <span>{String(i + 1).padStart(2, '0')}</span>{l.label}
             </a>
           ))}

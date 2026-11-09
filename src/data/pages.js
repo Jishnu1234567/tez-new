@@ -166,12 +166,13 @@ export const aboutPage = {
     eyebrow: 'Who we are',
     title: ['Small team.', 'Full stack. Real outcomes.'],
     paras: [
-      'Tezco is a software engineering company. We build SaaS platforms, websites, mobile apps and AI solutions for businesses that want to grow, and final year projects for students who want to learn by building.',
+      'Tezco Technology Studio is a software engineering company in Aluva, Kochi. We build SaaS platforms, websites, mobile apps and AI solutions for businesses that want to grow, and final year projects for students who want to learn by building.',
       'We keep it simple: one team does the design, backend, mobile and AI work, you get a fixed price upfront, and you see progress every week. When the product goes live, we stay with you for 30 days of free support.',
     ],
     image: '/images/stock/team-review.webp',
   },
   facts: [
+    { label: 'Studio', value: company.name },
     { label: 'Company', value: company.legalName },
     { label: 'Founded', value: company.founded },
     { label: 'CIN', value: company.cin },
@@ -263,8 +264,8 @@ export const portfolio = {
     blurb: ['Tezco keeps design, code and launch in one team,', 'so you never rebuild from scratch.'],
     columns: [
       { title: 'Explore', links: [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }, { label: 'Portfolio', href: '/work/' }, { label: 'Process', href: '/process/' }] },
-      { title: 'Services', links: [{ label: 'SaaS', href: '/services/#saas' }, { label: 'Web', href: '/services/#web' }, { label: 'Mobile apps', href: '/services/#mobile' }, { label: 'AI solutions', href: '/services/#ai' }, { label: 'Automation', href: '/services/#automation' }] },
-      { title: 'Company', links: [{ label: 'About', href: '/about/' }, { label: 'Contact', href: '/contact/' }, { label: 'College projects', href: '/services/#college' }] },
+      { title: 'Services', links: [{ label: 'SaaS', href: '/services/saas-development/' }, { label: 'Web', href: '/services/web-development/' }, { label: 'Mobile apps', href: '/services/mobile-app-development/' }, { label: 'AI solutions', href: '/services/ai-development/' }, { label: 'Automation', href: '/services/workflow-automation/' }] },
+      { title: 'Company', links: [{ label: 'About', href: '/about/' }, { label: 'Contact', href: '/contact/' }, { label: 'College projects', href: '/services/final-year-projects/' }] },
     ],
     chat: { title: 'Tell us about your project', placeholder: 'A booking app for my clinic', note: 'Opens WhatsApp · Usually replies within a day' },
     sign: ['Tezco', 'Build what counts.'],
@@ -278,7 +279,7 @@ export const contactHero = {
   sub: ['Book a free 30-minute discovery call. Fixed price, clear timeline', 'and no hidden costs. We usually reply within a day.'],
   placeholder: 'Tell us what you want to build',
   button: 'Start on WhatsApp',
-  blurb: 'Tezco builds SaaS platforms, websites, mobile apps and AI solutions for businesses that want to grow. Fixed price, weekly progress and 30 days of free support after every launch.',
+  blurb: 'Tezco Technology Studio builds SaaS platforms, websites, mobile apps and AI solutions for businesses that want to grow. Fixed price, weekly progress and 30 days of free support after every launch.',
   image: '/images/stock/contact-boardroom.webp',
   imageSm: '/images/stock/contact-boardroom-sm.webp',
 };
@@ -332,9 +333,9 @@ export const portfolioHero = {
   poster: '/video/process-cliff-poster.webp',
   project: { label: 'Live projects', name: 'Studio and artist websites', chip: 'Launched 2026', link: 'View case studies', href: '#element' },
   builds: [
-    { name: 'Websites and stores', chip: 'Web', href: '/services/#web' },
-    { name: 'SaaS platforms', chip: 'SaaS', href: '/services/#saas' },
-    { name: 'Mobile apps', chip: 'iOS · Android', href: '/services/#mobile' },
+    { name: 'Websites and stores', chip: 'Web', href: '/services/web-development/' },
+    { name: 'SaaS platforms', chip: 'SaaS', href: '/services/saas-development/' },
+    { name: 'Mobile apps', chip: 'iOS · Android', href: '/services/mobile-app-development/' },
   ],
   live: { text: 'Have a project in mind?', link: 'Start a project', href: '/contact/' },
   site: { left: 'Latest launch', right: 'Live', title: 'Ranjith Meleppat', link: 'Visit the live site', href: 'https://ranjithmeleppat.elementkochi.com/' },

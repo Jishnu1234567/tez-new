@@ -3,8 +3,30 @@
 // Used by the Vite plugin in vite.config.js and by scripts/prerender.mjs
 // (sitemap.xml, robots.txt, llms.txt).
 import { company, services } from './src/data/content.js';
-import { faq, caseStudies } from './src/data/pages.js';
+import { faq, caseStudies, serviceDetails } from './src/data/pages.js';
+import { servicePages } from './src/data/servicePages.js';
 import { FONT_FACES, FONT_PRELOAD } from './src/fonts.generated.js';
+import { loadEnv } from 'vite';
+
+// Build-time settings from the host or a local .env file (see .env.example).
+const env = { ...loadEnv('production', process.cwd(), ''), ...process.env };
+
+// Name exactly as on the Google Business Profile (see company.name).
+const NAME = company.name;
+
+// Cloudflare Web Analytics: cookie-free visitor counts, so no cookie banner is needed.
+// Leave CF_ANALYTICS_TOKEN empty to build without analytics.
+const CF_TOKEN = (env.CF_ANALYTICS_TOKEN || '').trim();
+
+// Google Business Profile ("Tezco Technology Studio"). The share link the owner gave,
+// plus a Maps search for the exact name and town, so search engines tie this website
+// to that profile and not to other businesses called Tezco.
+// Better: replace GBP_MAPS with the profile's own Maps link (maps.app.goo.gl/... from
+// Share on Google Maps on a computer) when available.
+const GBP_SHARE = 'https://share.google/VBYIkYAu2piIPS5Dv';
+const GBP_MAPS = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Tezco Technology Studio, Aluva, Kerala');
+
+const svcUrl = (slug) => `${SITE}${servicePages[slug].path}`;
 
 // Production address of the site. Override at build time with SITE_URL=https://... if it changes.
 export const SITE = (process.env.SITE_URL || 'https://thetezco.com').replace(/\/$/, '');
@@ -17,15 +39,15 @@ const fonts = (...extra) => ['interTight', 'instrumentSerif', ...extra];
 export const pages = {
   home: {
     path: '/',
-    title: 'Tezco | SaaS, Web, Mobile App & AI Development Company in Kerala',
-    description: 'Tezco builds SaaS platforms, websites, mobile apps and AI solutions in Kochi, Kerala. Fixed price, weekly progress and 30 days of free support.',
+    title: 'Tezco Technology Studio | SaaS, Web, Mobile App & AI Development in Kochi, Kerala',
+    description: 'Tezco Technology Studio builds SaaS platforms, websites, mobile apps and AI solutions in Aluva, Kochi, Kerala. Fixed price, weekly progress and 30 days of free support.',
     fonts: fonts('archivo'),
     preload: '/video/hero-white-poster.webp',
     name: 'Home',
   },
   services: {
     path: '/services/',
-    title: 'Services | SaaS, Web, Mobile, AI & Automation Development | Tezco',
+    title: 'SaaS, Web, Mobile, AI & Automation Services | Tezco Technology Studio',
     description: 'SaaS development, websites, iOS and Android apps, AI chatbots and workflow automation, designed and built by one team at a fixed price. College projects from ₹2,999.',
     fonts: fonts(),
     preload: '/video/services-white-poster.webp',
@@ -34,15 +56,15 @@ export const pages = {
   },
   work: {
     path: '/work/',
-    title: 'Portfolio | Websites and Apps Built by Tezco',
-    description: 'Real products designed, built and launched by Tezco, including the Element Sound Studio website. See the brief, what we built and the live result.',
+    title: 'Portfolio | Websites and Apps Built by Tezco Technology Studio',
+    description: 'Real products designed, built and launched by Tezco Technology Studio, including the Element Sound Studio website. See the brief, what we built and the live result.',
     fonts: fonts('instrumentSans', 'googleSansFlex'),
     preload: '/video/process-cliff-poster.webp',
     name: 'Portfolio',
   },
   process: {
     path: '/process/',
-    title: 'Our Process | Fixed-Price Software Development in 4 Steps | Tezco',
+    title: 'Our Process | Fixed-Price Software Development | Tezco Technology Studio',
     description: 'From a free 30-minute discovery call to launch day: a fixed-price proposal, weekly sprints with visible progress, and 30 days of free support after go-live.',
     fonts: fonts('outfit', 'inter'),
     preload: '/video/process-head-poster.webp',
@@ -51,16 +73,16 @@ export const pages = {
   },
   about: {
     path: '/about/',
-    title: 'About Tezco | Software Engineering Company in Aluva, Kochi',
-    description: 'Tezco is a software engineering company in Aluva, Kochi, building SaaS, web, mobile and AI products for growing businesses at a fixed price.',
+    title: 'About Tezco Technology Studio | Software Company in Aluva, Kochi',
+    description: 'Tezco Technology Studio is a software engineering company in Aluva, Kochi, building SaaS, web, mobile and AI products for growing businesses at a fixed price.',
     fonts: fonts('anton', 'robotoCondensed', 'bigShoulders'),
     preload: '/images/work/element/home.webp',
     name: 'About',
   },
   contact: {
     path: '/contact/',
-    title: 'Contact Tezco | Book a Free 30-Minute Discovery Call',
-    description: `Book a free 30-minute discovery call with Tezco on WhatsApp, phone or email (${company.email}). We usually reply within a day.`,
+    title: 'Contact Tezco Technology Studio | Free 30-Minute Discovery Call',
+    description: `Book a free 30-minute discovery call with Tezco Technology Studio, Aluva, Kochi, on WhatsApp, phone or email (${company.email}). We usually reply within a day.`,
     fonts: fonts('inter'),
     preload: '/images/stock/contact-boardroom.webp',
     preloadSm: '/images/stock/contact-boardroom-sm.webp',
@@ -69,21 +91,31 @@ export const pages = {
   },
   privacy: {
     path: '/privacy/',
-    title: 'Privacy Policy | Tezco Software Development, Kochi',
-    description: 'How Tezco collects, uses and protects personal data, and your rights under the Digital Personal Data Protection Act, 2023.',
+    title: 'Privacy Policy | Tezco Technology Studio',
+    description: 'How Tezco Technology Studio collects, uses and protects personal data, and your rights under the Digital Personal Data Protection Act, 2023.',
     fonts: fonts(),
     name: 'Privacy Policy',
   },
   terms: {
     path: '/terms/',
-    title: 'Terms of Service | Tezco Software Development, Kochi',
-    description: 'The terms that apply to using the Tezco website and making an enquiry about a project.',
+    title: 'Terms of Service | Tezco Technology Studio',
+    description: 'The terms that apply to using the Tezco Technology Studio website and making an enquiry about a project.',
     fonts: fonts(),
     name: 'Terms of Service',
   },
+  // One page per service: svc-saas, svc-web, ... (content in src/data/servicePages.js).
+  ...Object.fromEntries(Object.entries(servicePages).map(([slug, s]) => [`svc-${slug}`, {
+    path: s.path,
+    title: s.seoTitle,
+    description: s.seoDescription,
+    fonts: fonts(),
+    preload: serviceDetails[slug].image,
+    name: s.name,
+    service: slug,
+  }])),
   notfound: {
     path: '/404.html',
-    title: 'Page not found | Tezco',
+    title: 'Page not found | Tezco Technology Studio',
     description: 'The page you are looking for has moved or no longer exists.',
     fonts: fonts(),
     noindex: true,
@@ -98,18 +130,20 @@ const SITE_ID = `${SITE}/#website`;
 const organization = {
   '@type': ['Organization', 'ProfessionalService'],
   '@id': ORG_ID,
-  name: 'Tezco',
+  name: NAME,
   legalName: company.legalName,
-  alternateName: ['Tezco Solutions', 'Tezco Services', 'Technical Expertz', 'TheTezco'],
+  alternateName: ['Tezco', 'TheTezco', 'Tezco Solutions', 'Tezco Services', 'Technical Expertz'],
   // Official profiles: lets search engines connect the brand across the web.
   sameAs: [
     'https://in.linkedin.com/company/tezco-technical-expertz',
     'https://www.instagram.com/tezcoservices/',
+    GBP_SHARE,
   ],
+  hasMap: GBP_MAPS,
   url: `${SITE}/`,
   logo: { '@type': 'ImageObject', url: `${SITE}/icon-512.png`, width: 512, height: 512 },
   image: `${SITE}${OG_IMAGE}`,
-  description: 'Software engineering company building SaaS platforms, websites, mobile apps, AI solutions and workflow automation at a fixed price, with weekly progress and 30 days of free support.',
+  description: 'Tezco Technology Studio is a software engineering company in Aluva, Kochi, Kerala, building SaaS platforms, websites, mobile apps, AI solutions and workflow automation at a fixed price, with weekly progress and 30 days of free support.',
   email: company.email,
   telephone: company.phone.replace(/\s/g, ''),
   foundingDate: company.founded,
@@ -139,23 +173,25 @@ const organization = {
     name: 'Software development services',
     itemListElement: services.items.map((s) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: s.title, description: s.text, url: `${SITE}/services/#${s.slug}` },
+      itemOffered: { '@type': 'Service', name: s.title, description: s.text, url: svcUrl(s.slug) },
     })),
   },
 };
 
 const website = {
-  '@type': 'WebSite', '@id': SITE_ID, url: `${SITE}/`, name: 'Tezco', inLanguage: 'en-IN', publisher: { '@id': ORG_ID },
+  '@type': 'WebSite', '@id': SITE_ID, url: `${SITE}/`, name: NAME, alternateName: ['Tezco', 'thetezco.com'], inLanguage: 'en-IN', publisher: { '@id': ORG_ID },
 };
 
-const breadcrumb = (p) => ({
-  '@type': 'BreadcrumbList',
-  '@id': `${SITE}${p.path}#breadcrumb`,
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
-    ...(p.path === '/' ? [] : [{ '@type': 'ListItem', position: 2, name: p.name, item: `${SITE}${p.path}` }]),
-  ],
-});
+const breadcrumb = (p) => {
+  const trail = [{ name: 'Home', path: '/' }];
+  if (p.service) trail.push({ name: 'Services', path: '/services/' });
+  if (p.path !== '/') trail.push({ name: p.name, path: p.path });
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${SITE}${p.path}#breadcrumb`,
+    itemListElement: trail.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, item: `${SITE}${t.path}` })),
+  };
+};
 
 const PAGE_TYPE = { about: 'AboutPage', contact: 'ContactPage', work: 'CollectionPage' };
 
@@ -179,7 +215,7 @@ export function jsonLd(key) {
       '@type': 'ItemList', name: 'Tezco services',
       itemListElement: services.items.map((s, i) => ({
         '@type': 'ListItem', position: i + 1,
-        item: { '@type': 'Service', name: s.title, description: s.text, serviceType: s.title, provider: { '@id': ORG_ID }, areaServed: 'IN', url: `${SITE}/services/#${s.slug}` },
+        item: { '@type': 'Service', name: s.title, description: s.text, serviceType: s.title, provider: { '@id': ORG_ID }, areaServed: 'IN', url: svcUrl(s.slug) },
       })),
     });
   }
@@ -195,6 +231,22 @@ export function jsonLd(key) {
       '@type': 'WebSite', name: `${name} website`, about: c.industry, dateCreated: c.year,
       description: c.overview, creator: { '@id': ORG_ID }, url: c.url,
     })));
+  }
+  if (p.service) {
+    const s = servicePages[p.service];
+    const d = serviceDetails[p.service];
+    graph.push({
+      '@type': 'Service', '@id': `${url}#service`, name: s.name, serviceType: s.name, url,
+      description: s.seoDescription, provider: { '@id': ORG_ID },
+      areaServed: [{ '@type': 'City', name: 'Kochi' }, { '@type': 'State', name: 'Kerala' }, { '@type': 'Country', name: 'India' }],
+      image: `${SITE}${d.image}`,
+      hasOfferCatalog: { '@type': 'OfferCatalog', name: `${s.name}: what is included`, itemListElement: d.includes.map((x) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: x } })) },
+      ...(d.price ? { offers: { '@type': 'Offer', priceCurrency: 'INR', price: d.price.replace(/[^d]/g, ''), priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'INR', minPrice: d.price.replace(/[^d]/g, '') } } } : {}),
+    });
+    graph.push({
+      '@type': 'FAQPage', '@id': `${url}#faq`,
+      mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    });
   }
   if (p.faq) {
     graph.push({
@@ -220,7 +272,7 @@ export function headHtml(key) {
     p.noindex ? '' : `<link rel="canonical" href="${url}" />`,
     '<meta name="theme-color" content="#0b0b0b" />',
     '<meta name="color-scheme" content="light" />',
-    '<meta name="author" content="Tezco" />',
+    `<meta name="author" content="${NAME}" />`,
     '<meta name="format-detection" content="telephone=no" />',
     '<meta name="geo.region" content="IN-KL" />',
     '<meta name="geo.placename" content="Aluva, Ernakulam, Kerala" />',
@@ -229,7 +281,7 @@ export function headHtml(key) {
     '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />',
     '<link rel="manifest" href="/site.webmanifest" />',
     '<meta property="og:type" content="website" />',
-    '<meta property="og:site_name" content="Tezco" />',
+    `<meta property="og:site_name" content="${NAME}" />`,
     '<meta property="og:locale" content="en_IN" />',
     `<meta property="og:title" content="${esc(p.title)}" />`,
     `<meta property="og:description" content="${esc(p.description)}" />`,
@@ -237,7 +289,7 @@ export function headHtml(key) {
     `<meta property="og:image" content="${img}" />`,
     '<meta property="og:image:width" content="1200" />',
     '<meta property="og:image:height" content="630" />',
-    '<meta property="og:image:alt" content="Tezco: software, web, mobile and AI development" />',
+    '<meta property="og:image:alt" content="Tezco Technology Studio: software, web, mobile and AI development" />',
     '<meta name="twitter:card" content="summary_large_image" />',
     `<meta name="twitter:title" content="${esc(p.title)}" />`,
     `<meta name="twitter:description" content="${esc(p.description)}" />`,
@@ -249,5 +301,6 @@ export function headHtml(key) {
     p.preload ? `<link rel="preload" as="image" href="${p.preload}"${p.preloadSm ? ' media="(min-width: 761px)"' : ''} fetchpriority="high" />` : '',
     `<style>${p.fonts.map((f) => FONT_FACES[f]).join('\n')}</style>`,
     `<script type="application/ld+json">${JSON.stringify(jsonLd(key)).replace(/</g, '\\u003c')}</script>`,
+    CF_TOKEN ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${JSON.stringify({ token: CF_TOKEN })}'></script>` : '',
   ].filter(Boolean).join('\n    ');
 }

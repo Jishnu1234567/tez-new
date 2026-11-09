@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} {company.legalName}. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} {company.name}, a brand of {company.legalName}. All rights reserved.</span>
           <span className="footer-legal"><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a><span>CIN {company.cin}</span></span>
         </div>
       </div>

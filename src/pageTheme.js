@@ -1,12 +1,15 @@
 // Page-level theme classes on <html>. Shared by the app (App.jsx, Navbar.jsx) and the
 // build-time prerender script, so the first paint already has the right navbar colours.
 
-export const PAGE_KEYS = ['home', 'services', 'work', 'process', 'about', 'contact', 'privacy', 'terms', 'notfound'];
+import { servicePages } from './data/servicePages.js';
+
+const SVC_KEYS = Object.keys(servicePages).map((slug) => `svc-${slug}`);
+export const PAGE_KEYS = ['home', 'services', 'work', 'process', 'about', 'contact', 'privacy', 'terms', 'notfound', ...SVC_KEYS];
 
 // Hero is light, so the navbar starts with dark text.
-export const LIGHT_HERO = ['home', 'services', 'process', 'work', 'about', 'privacy', 'terms', 'notfound'];
+export const LIGHT_HERO = ['home', 'services', 'process', 'work', 'about', 'privacy', 'terms', 'notfound', ...SVC_KEYS];
 // Once scrolled, the navbar becomes a light frosted bar with dark text.
-export const LIGHT_BAR = ['home', 'services', 'process', 'about', 'work', 'privacy', 'terms', 'notfound'];
+export const LIGHT_BAR = ['home', 'services', 'process', 'about', 'work', 'privacy', 'terms', 'notfound', ...SVC_KEYS];
 
 export function htmlClasses(page, { wide = true, aboutFirst = true } = {}) {
   return [

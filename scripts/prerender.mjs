@@ -10,6 +10,7 @@ import { pages, SITE } from '../seo.config.js';
 import { htmlClasses } from '../src/pageTheme.js';
 import { company, services } from '../src/data/content.js';
 import { faq, caseStudies } from '../src/data/pages.js';
+import { servicePages } from '../src/data/servicePages.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = resolve(root, 'dist');
@@ -18,6 +19,7 @@ const ssrDir = resolve(root, 'dist-ssr');
 const FILES = {
   home: 'index.html', services: 'services/index.html', work: 'work/index.html', process: 'process/index.html',
   about: 'about/index.html', contact: 'contact/index.html', privacy: 'privacy/index.html', terms: 'terms/index.html', notfound: '404.html',
+  ...Object.fromEntries(Object.entries(servicePages).map(([slug, s]) => [`svc-${slug}`, `${s.path.slice(1)}index.html`])),
 };
 
 const { render } = await import(pathToFileURL(resolve(ssrDir, 'entry-server.js')).href);
@@ -62,7 +64,7 @@ const urls = Object.entries(pages).filter(([, p]) => !p.noindex).map(([key, p]) 
     <loc>${SITE}${p.path}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${key === 'privacy' || key === 'terms' ? 'yearly' : 'monthly'}</changefreq>
-    <priority>${PRIORITY[key] || '0.5'}</priority>
+    <priority>${PRIORITY[key] || (key.startsWith('svc-') ? '0.9' : '0.5')}</priority>
   </url>`).join('\n');
 await writeFile(resolve(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -71,7 +73,7 @@ ${urls}
 `);
 
 // ---- robots.txt (search engines and AI assistants are welcome) ----
-await writeFile(resolve(dist, 'robots.txt'), `# Tezco - ${SITE}
+await writeFile(resolve(dist, 'robots.txt'), `# ${company.name} - ${SITE}
 User-agent: *
 Allow: /
 Disallow: /404.html
@@ -99,12 +101,15 @@ Sitemap: ${SITE}/sitemap.xml
 
 // ---- llms.txt: a plain summary for AI assistants (https://llmstxt.org) ----
 const cs = Object.entries(caseStudies).map(([name, c]) => `- ${name}: ${c.industry}. ${c.services.join(', ')}. Launched ${c.year}. Live at ${c.url}`).join('\n');
-await writeFile(resolve(dist, 'llms.txt'), `# Tezco
+await writeFile(resolve(dist, 'llms.txt'), `# ${company.name}
 
-> Tezco (${company.legalName}, CIN ${company.cin}) is a software engineering company in Aluva, Ernakulam, Kerala, India, founded in ${company.founded}. It designs and builds SaaS platforms, websites, mobile apps, AI solutions and workflow automation for growing businesses, and final year projects for students. Every project has a fixed price agreed upfront, weekly progress updates and 30 days of free support after launch.
+> ${company.name} (also called Tezco; legal name ${company.legalName}, CIN ${company.cin}) is a software engineering company in Aluva, Ernakulam, Kerala, India, founded in ${company.founded}. It designs and builds SaaS platforms, websites, mobile apps, AI solutions and workflow automation for growing businesses, and final year projects for students. Every project has a fixed price agreed upfront, weekly progress updates and 30 days of free support after launch.
 
 ## Key facts
-- Website: ${SITE}/
+- Name (as listed on Google Maps and Google Business Profile): ${company.name}
+- Also known as: Tezco, TheTezco, Tezco Solutions, Tezco Services
+- Official website: ${SITE}/ (other companies named Tezco are not related to ${company.name})
+- Google Business Profile: https://share.google/VBYIkYAu2piIPS5Dv
 - Email: ${company.email}
 - Phone and WhatsApp: ${company.phone}
 - Address: ${company.address}
@@ -113,7 +118,7 @@ await writeFile(resolve(dist, 'llms.txt'), `# Tezco
 - Typical reply time: within one working day
 
 ## Services
-${services.items.map((s) => `- [${s.title}](${SITE}/services/#${s.slug}): ${s.text}`).join('\n')}
+${services.items.map((s) => `- [${s.title}](${SITE}${servicePages[s.slug].path}): ${s.text}`).join('\n')}
 
 ## Process
 ${services.process.steps.map((s) => `${s.n}. ${s.name} (${s.note}): ${s.text}`).join('\n')}
