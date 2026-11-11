@@ -110,6 +110,7 @@ await writeFile(resolve(dist, 'llms.txt'), `# ${company.name}
 - Also known as: Tezco, TheTezco, Tezco Solutions, Tezco Services
 - Official website: ${SITE}/ (other companies named Tezco are not related to ${company.name})
 - Google Business Profile: https://share.google/VBYIkYAu2piIPS5Dv
+- Logo: ${SITE}/brand/tezco-technology-studio-logo.png (orange square, white TEZCO wordmark, "Technology Studio")
 - Email: ${company.email}
 - Phone and WhatsApp: ${company.phone}
 - Address: ${company.address}

@@ -31,6 +31,9 @@ const svcUrl = (slug) => `${SITE}${servicePages[slug].path}`;
 // Production address of the site. Override at build time with SITE_URL=https://... if it changes.
 export const SITE = (process.env.SITE_URL || 'https://thetezco.com').replace(/\/$/, '');
 export const OG_IMAGE = '/og-image.jpg';
+// Official profile picture (same as the Google Business Profile, LinkedIn and Instagram):
+// orange square with the white TEZCO wordmark and "Technology Studio".
+export const LOGO = '/brand/tezco-technology-studio-logo.png';
 
 // Fonts are self-hosted (scripts/fetch-fonts.mjs). Each page lists the families it uses;
 // their @font-face rules are inlined in <head> and the main ones preloaded.
@@ -141,8 +144,8 @@ const organization = {
   ],
   hasMap: GBP_MAPS,
   url: `${SITE}/`,
-  logo: { '@type': 'ImageObject', url: `${SITE}/icon-512.png`, width: 512, height: 512 },
-  image: `${SITE}${OG_IMAGE}`,
+  logo: { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: `${SITE}${LOGO}`, contentUrl: `${SITE}${LOGO}`, width: 1200, height: 1200, caption: NAME },
+  image: [`${SITE}${LOGO}`, `${SITE}${OG_IMAGE}`],
   description: 'Tezco Technology Studio is a software engineering company in Aluva, Kochi, Kerala, building SaaS platforms, websites, mobile apps, AI solutions and workflow automation at a fixed price, with weekly progress and 30 days of free support.',
   email: company.email,
   telephone: company.phone.replace(/\s/g, ''),
@@ -277,6 +280,7 @@ export function headHtml(key) {
     '<meta name="geo.region" content="IN-KL" />',
     '<meta name="geo.placename" content="Aluva, Ernakulam, Kerala" />',
     '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />',
+    '<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />',
     '<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />',
     '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />',
     '<link rel="manifest" href="/site.webmanifest" />',
